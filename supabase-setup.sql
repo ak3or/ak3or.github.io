@@ -251,7 +251,13 @@ create policy "admins can delete hub files"
 on storage.objects for delete to authenticated
 using (bucket_id = 'public-files' and (select public.is_site_admin()));
 
--- 5) IMPORTANT: after creating your owner account in Supabase Authentication,
--- find its UUID in Authentication > Users, then run:
--- update public.profiles set is_admin = true where id = 'PASTE-OWNER-USER-UUID-HERE';
--- Do not add an admin-creation form to the public website.
+-- 5) PROMOTE YOUR ONE OWNER ACCOUNT.
+-- In Supabase Authentication > Users, create your own account and copy its UUID.
+-- Then run the two statements below, replacing the UUID. This sets every other
+-- profile to non-admin and works even if your profile row was not created yet.
+-- update public.profiles set is_admin = false;
+-- insert into public.profiles (id, is_admin)
+-- values ('5ce486a2-73a1-40f0-a359-b20db275e7fe', true)
+-- on conflict (id) do update set is_admin = true;
+-- Do not add an admin-creation form to the public website. Disable public sign-ups
+-- in Supabase Authentication settings after creating your owner account.
