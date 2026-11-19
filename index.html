@@ -38,7 +38,29 @@
     .catalog-banner:after{content:"";position:absolute;width:230px;height:230px;right:18%;top:-160px;border-radius:50%;background:var(--accent);filter:blur(85px);opacity:.24;pointer-events:none}
     .catalog-copy{position:relative;z-index:1;max-width:720px}.catalog-kicker{color:var(--accent);font-size:10px;letter-spacing:2px;font-weight:900}.catalog-copy h3{font:700 clamp(22px,3vw,32px) var(--display);letter-spacing:-1px;margin:7px 0}.catalog-copy p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 8px}.catalog-copy small{color:var(--muted);font-size:10px;line-height:1.6}.catalog-actions{position:relative;z-index:1;display:grid;gap:10px;min-width:205px}.catalog-actions a{justify-content:center;text-align:center}.catalog-note{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;margin:13px 2px 16px}.catalog-note .live-dot{flex-shrink:0}.catalog-footnote{margin:17px 2px 0;line-height:1.7}.app-card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.app-card-actions .download-btn{font-size:10px;padding:9px 11px}.copy-command-btn{border:1px solid var(--line);background:rgba(255,255,255,.055);color:var(--text);padding:9px 11px;border-radius:10px;font-size:10px;font-weight:800}.copy-command-btn:hover{background:var(--glow);border-color:var(--accent)}.mobile-store-links{display:flex;flex-wrap:wrap;gap:7px}.mobile-store-links .download-btn{font-size:10px;padding:9px 11px}.card-bottom{align-items:flex-start}.card-bottom .field-hint{padding-top:7px}
     @media(max-width:700px){.catalog-banner{align-items:stretch;flex-direction:column;padding:20px}.catalog-actions{grid-template-columns:1fr 1fr;min-width:0}.catalog-actions a{font-size:11px;padding:11px 8px!important}.catalog-copy p{font-size:12px}}
-  </style>
+  
+    /* Dedicated, full-screen private owner login page */
+    #loginModal.owner-login-backdrop{z-index:110;display:none;align-items:stretch;justify-content:stretch;padding:0;background:#080812;backdrop-filter:none}
+    #loginModal.owner-login-backdrop.show{display:block}
+    body.owner-login-mode{overflow:hidden}
+    body.owner-login-mode .topbar,body.owner-login-mode main.shell,body.owner-login-mode footer{display:none!important}
+    .owner-login-screen{position:relative;isolation:isolate;min-height:100vh;width:100%;overflow:auto;padding:25px clamp(20px,5vw,76px) 20px;background:radial-gradient(ellipse at 18% 18%,rgba(167,139,250,.17),transparent 38%),radial-gradient(ellipse at 88% 82%,rgba(251,113,133,.13),transparent 34%),linear-gradient(135deg,#090914,#0d0c1d 55%,#100d1d);}
+    .owner-login-screen:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.16;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,black,transparent 92%)}
+    .owner-login-top{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1400px;margin:0 auto}
+    .owner-login-top .brand{font-size:18px}.owner-back-btn{font-size:12px;cursor:pointer}
+    .owner-login-layout{width:min(1100px,100%);min-height:calc(100vh - 150px);margin:20px auto 0;display:grid;grid-template-columns:1fr minmax(340px,460px);gap:clamp(35px,8vw,110px);align-items:center}
+    .owner-login-intro{max-width:510px;padding:25px 0;animation:rise .55s ease both}
+    .owner-login-emblem{position:relative;width:88px;height:88px;border-radius:27px;display:grid;place-items:center;margin:34px 0 28px;color:var(--accent);background:linear-gradient(145deg,rgba(167,139,250,.2),rgba(251,113,133,.08));border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 60px rgba(167,139,250,.18),inset 0 1px rgba(255,255,255,.15)}
+    .owner-login-emblem svg{width:42px;height:42px;stroke-width:1.5}.owner-login-emblem span{position:absolute;inset:-9px;border:1px solid rgba(167,139,250,.2);border-radius:33px;transform:rotate(12deg)}
+    .owner-login-intro h1{font:700 clamp(45px,6vw,72px)/.99 var(--display);letter-spacing:-3.5px;margin:14px 0 18px}.owner-login-intro>p{max-width:460px;color:var(--muted);font-size:15px;line-height:1.85;margin:0}
+    .owner-login-points{display:grid;gap:15px;margin-top:34px}.owner-login-points div{display:flex;align-items:center;gap:11px;color:#d8d5e7;font-size:12px;font-weight:600}.owner-login-points svg{width:17px;height:17px;color:var(--accent)}
+    .owner-login-card{width:100%;padding:clamp(24px,4vw,38px);border-radius:27px;background:rgba(19,18,38,.78);animation:rise .6s .08s ease both}.owner-card-icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:var(--accent);background:var(--glow);margin-bottom:22px}.owner-card-icon svg{width:24px;height:24px}.owner-login-card h2{font:700 30px var(--display);letter-spacing:-1px;margin:8px 0}.owner-login-subtitle{color:var(--muted);font-size:12px;line-height:1.7;margin:0 0 22px}
+    .owner-login-card .field{gap:9px;margin:17px 0}.owner-login-card .field label{font-size:10px;letter-spacing:1.3px}.owner-input-wrap{position:relative;display:flex;align-items:center}.owner-input-wrap>svg{position:absolute;left:14px;width:17px;height:17px;color:var(--muted);pointer-events:none}.owner-input-wrap input{height:50px;padding:0 44px!important;padding-left:43px!important;border-radius:13px!important;background:rgba(255,255,255,.045)!important}.owner-input-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}.password-toggle{position:absolute;right:9px;width:34px;height:34px;border:0;border-radius:9px;background:transparent;color:var(--muted);display:grid;place-items:center}.password-toggle:hover{background:rgba(255,255,255,.07);color:var(--text)}.password-toggle svg{width:17px;height:17px}
+    .owner-signin-btn{height:50px;display:flex;align-items:center;gap:9px;margin-top:23px}.owner-signin-btn svg{width:17px;height:17px}.owner-login-foot{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;color:var(--muted);font-size:10px}.owner-login-foot svg{width:14px;height:14px;color:#83e6b0}.owner-login-footer{text-align:center;color:rgba(220,216,238,.48);font-size:10px;margin:14px auto 0}
+    #ownerConfigNotice{font-size:11px;line-height:1.7}
+    @media(max-width:800px){.owner-login-layout{grid-template-columns:1fr;gap:10px;width:min(480px,100%);padding:24px 0}.owner-login-intro{padding:0}.owner-login-emblem{width:64px;height:64px;margin:20px 0}.owner-login-emblem svg{width:30px;height:30px}.owner-login-intro h1{font-size:43px;letter-spacing:-2px}.owner-login-intro>p{font-size:13px}.owner-login-points{display:none}.owner-login-card{margin-top:16px}.owner-login-screen{padding-top:18px}.owner-login-footer{padding-bottom:12px}}
+    @media(max-width:430px){.owner-login-top .brand{font-size:16px}.owner-back-btn{font-size:0;padding:10px 12px}.owner-back-btn svg{width:17px;height:17px}.owner-login-card{padding:23px 19px}.owner-login-card h2{font-size:26px}}
+</style>
 </head>
 <body>
 <div class="ambient"></div>
@@ -78,7 +100,38 @@
 </main>
 <footer class="shell"><div><span class="footer-brand"><i data-lucide="sparkles"></i> AK3OR</span> <span> — a little corner of the internet.</span></div><div>© <span id="year"></span> AK3OR Digital Hub · Built for discovery.</div></footer>
 
-<div class="modal-backdrop" id="loginModal" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="ownerLoginTitle"><div class="modal-head"><div><div class="section-kicker">PRIVATE ACCESS</div><h2 id="ownerLoginTitle">Owner sign in</h2></div><button class="close-btn" data-close="loginModal" aria-label="Close"><i data-lucide="x"></i></button></div><div class="notice">This area is for the site owner only. Public visitors can browse and download published content.</div><form id="loginForm"><div class="field"><label for="loginEmail">EMAIL ADDRESS</label><input id="loginEmail" type="email" autocomplete="username" placeholder="you@example.com" required /></div><div class="field"><label for="loginPassword">PASSWORD</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Your password" required /></div><button class="primary-btn full" type="submit" id="loginSubmit">Sign in securely ↗</button></form><p class="field-hint" style="margin-top:14px">Admin access requires your own configured Supabase project and an account marked as administrator. There is no public admin registration.</p></div></div>
+<div class="modal-backdrop owner-login-backdrop" id="loginModal" aria-hidden="true">
+  <section class="owner-login-screen" aria-label="Private owner login">
+    <div class="owner-login-top">
+      <a class="brand" href="#home" id="loginBrand" aria-label="AK3OR home"><span class="brand-mark"><i data-lucide="sparkles"></i></span><span>AK3OR<small>DIGITAL HUB</small></span></a>
+      <button class="secondary-btn owner-back-btn" type="button" id="backToWebsite"><i data-lucide="arrow-left"></i> Back to website</button>
+    </div>
+    <div class="owner-login-layout">
+      <div class="owner-login-intro">
+        <div class="eyebrow"><span class="live-dot"></span> RESTRICTED AREA</div>
+        <div class="owner-login-emblem"><i data-lucide="shield-check"></i><span></span></div>
+        <div class="section-kicker">AK3OR OWNER PORTAL</div>
+        <h1>Your space.<br/><span class="gradient-text">Your control.</span></h1>
+        <p>Sign in with the authorized owner account to manage posts, files, applications, and social links.</p>
+        <div class="owner-login-points"><div><i data-lucide="lock-keyhole"></i><span>Private owner access</span></div><div><i data-lucide="database"></i><span>Protected by Supabase authentication</span></div><div><i data-lucide="shield-check"></i><span>Only approved admin accounts can continue</span></div></div>
+      </div>
+      <div class="owner-login-card glass" role="dialog" aria-modal="true" aria-labelledby="ownerLoginTitle">
+        <div class="owner-card-icon"><i data-lucide="user-round-check"></i></div>
+        <div class="section-kicker">WELCOME BACK</div>
+        <h2 id="ownerLoginTitle">Owner sign in</h2>
+        <p class="owner-login-subtitle">Enter your administrator credentials to open the private dashboard.</p>
+        <div class="notice" id="ownerConfigNotice" hidden>Supabase is not connected yet. Add your <strong>SUPABASE_URL</strong> and <strong>SUPABASE_PUBLISHABLE_KEY</strong> GitHub Actions variables, then redeploy the site.</div>
+        <form id="loginForm">
+          <div class="field"><label for="loginEmail">OWNER EMAIL</label><div class="owner-input-wrap"><i data-lucide="mail"></i><input id="loginEmail" type="email" autocomplete="username" placeholder="Enter your owner email" required /></div></div>
+          <div class="field"><label for="loginPassword">PASSWORD</label><div class="owner-input-wrap"><i data-lucide="key-round"></i><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required /><button class="password-toggle" type="button" id="toggleOwnerPassword" aria-label="Show password"><i data-lucide="eye"></i></button></div></div>
+          <button class="primary-btn full owner-signin-btn" type="submit" id="loginSubmit"><i data-lucide="lock-keyhole"></i> Sign in to dashboard <i data-lucide="arrow-up-right"></i></button>
+        </form>
+        <div class="owner-login-foot"><i data-lucide="shield-check"></i><span>Secure sign-in · No public registration</span></div>
+      </div>
+    </div>
+    <div class="owner-login-footer">© <span id="ownerLoginYear"></span> AK3OR · Private administrator portal</div>
+  </section>
+</div>
 
 <div class="admin-backdrop" id="adminPanel" aria-hidden="true"><div class="admin-window" role="dialog" aria-modal="true" aria-label="Private owner dashboard"><aside class="admin-side"><div class="admin-logo">AK3OR <span>CONTROL</span></div><nav class="admin-nav"><button class="active" data-admin-view="overview"><i data-lucide="layout-dashboard"></i>Overview</button><button data-admin-view="post"><i data-lucide="file-plus"></i>Create post</button><button data-admin-view="file"><i data-lucide="upload"></i>Upload file</button><button data-admin-view="app"><i data-lucide="app-window"></i>Add application</button><button data-admin-view="manage"><i data-lucide="list"></i>Manage content</button><button data-admin-view="social"><i data-lucide="share-2"></i>Social links</button></nav><div class="admin-side-foot"><button class="tiny-btn" id="adminLogout"><i data-lucide="log-out"></i>Log out</button><button class="tiny-btn" id="closeAdmin"><i data-lucide="x"></i>Close dashboard</button></div></aside><section class="admin-main"><div class="admin-top"><div><div class="section-kicker">PRIVATE CONTROL ROOM</div><h2 id="adminTitle">Overview</h2><p id="adminEmailLine">Your publishing workspace.</p></div><span class="mini-pill">OWNER MODE</span></div><div class="admin-content" id="adminContent"></div></section></div></div>
 <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
@@ -305,18 +358,30 @@ async function signIn(e){
     if(error)throw error;
     const allowed=await checkAdmin(data.session);
     if(!allowed){await db.auth.signOut();session=null;isAdmin=false;updateOwnerButton();throw new Error('This account is not authorized. Only the account you promoted as site owner can access the dashboard.')}
-    $('#loginModal').classList.remove('show');$('#loginModal').setAttribute('aria-hidden','true');
+    hideLoginPage();
     await loadPublicData();openAdmin();toast('Owner access verified. Welcome back.','success');
   }catch(err){toast(err.message||'Sign-in failed.','error')}
   finally{button.disabled=false;button.textContent='Sign in securely ↗'}
 }
 function openLogin(){
-  if(!isConfigured()){toast('Connect Supabase first using SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY in GitHub Actions Variables.','error');return}
-  $('#loginModal').classList.add('show');$('#loginModal').setAttribute('aria-hidden','false');$('#loginEmail').focus();
+  document.body.classList.add('owner-login-mode');
+  $('#ownerConfigNotice').hidden=!!isConfigured();
+  $('#loginModal').classList.add('show');$('#loginModal').setAttribute('aria-hidden','false');
+  if(location.hash.toLowerCase()!=='#admin')history.replaceState(null,'',location.pathname+location.search+'#admin');
+  setTimeout(()=>$('#loginEmail').focus(),40);
+}
+function hideLoginPage(){
+  $('#loginModal').classList.remove('show');$('#loginModal').setAttribute('aria-hidden','true');
+  document.body.classList.remove('owner-login-mode');
+}
+function closeLoginPage(){
+  hideLoginPage();
+  if(location.hash.toLowerCase()==='#admin')history.replaceState(null,'',location.pathname+location.search+'#home');
+  setView('home');
 }
 function openAdmin(){
   if(!requireOwner())return;
-  $('#loginModal').classList.remove('show');$('#loginModal').setAttribute('aria-hidden','true');
+  hideLoginPage();
   $('#adminPanel').classList.add('show');$('#adminPanel').setAttribute('aria-hidden','false');
   if(location.hash!=='#admin')history.replaceState(null,'',location.pathname+location.search+'#admin');
   showAdminView('overview');
@@ -369,10 +434,10 @@ function renderThemes(){
   refreshIcons(grid);
 }
 
-function initEvents(){$$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.go)));$('#mobileToggle').onclick=()=>$('#mobileMenu').classList.toggle('open');$('#adminAccess').onclick=()=>isAdmin?openAdmin():openLogin();$('#searchFocus').onclick=()=>{setView('posts');$('#postSearch').focus()};$$('[data-close]').forEach(b=>b.onclick=()=>{const el=$('#'+b.dataset.close);el.classList.remove('show');el.setAttribute('aria-hidden','true')});$('#loginModal').addEventListener('click',e=>{if(e.target.id==='loginModal'){e.currentTarget.classList.remove('show');e.currentTarget.setAttribute('aria-hidden','true')}});$('#loginForm').addEventListener('submit',signIn);$('#closeAdmin').onclick=()=>closeAdmin();$('#adminLogout').onclick=async()=>{if(db)await db.auth.signOut();session=null;isAdmin=false;updateOwnerButton();closeAdmin();toast('You have been signed out.')};$$('[data-admin-view]').forEach(b=>b.onclick=()=>showAdminView(b.dataset.adminView));$('#adminPanel').addEventListener('click',e=>{const g=e.target.closest('[data-admin-go]');if(g)showAdminView(g.dataset.adminGo);const del=e.target.closest('[data-delete]');if(del)deleteItem(del.dataset.delete,del.dataset.id);const pub=e.target.closest('[data-toggle-publish]');if(pub)togglePublished(pub.dataset.togglePublish,pub.dataset.id,pub.dataset.published);const edit=e.target.closest('[data-edit]');if(edit)editItem(edit.dataset.edit,edit.dataset.id);const sd=e.target.closest('[data-delete-social]');if(sd)deleteSocial(sd.dataset.deleteSocial)});$('#postSearch').oninput=renderPosts;$('#postSort').onchange=renderPosts;$('#fileSearch').oninput=renderFiles;$('#fileSort').onchange=renderFiles;$('#fileType').onchange=renderFiles;$('#appSearch').oninput=renderApps;$('#appPlatform').onchange=renderApps;$('#appSort').onchange=renderApps;$('#appsGrid').addEventListener('click',async e=>{const b=e.target.closest('[data-copy-command]');if(!b)return;const command=b.dataset.copyCommand;try{await navigator.clipboard.writeText(command);toast('WinGet download command copied. Paste it into Windows Terminal or PowerShell.','success')}catch{const t=document.createElement('textarea');t.value=command;document.body.append(t);t.select();document.execCommand('copy');t.remove();toast('Download command copied.','success')}});$('#themeGrid').onclick=e=>{const b=e.target.closest('[data-theme]');if(b){const t=themes.find(t=>t.name===b.dataset.theme);if(t){applyTheme(t);toast(`${t.name} theme applied.`)}}};$('#adminContent').addEventListener('submit',e=>{if(e.target.id==='createPostForm')submitPost(e);if(e.target.id==='uploadFileForm')submitFile(e);if(e.target.id==='createAppForm')submitApp(e);if(e.target.id==='socialForm')submitSocial(e)});$('#postsGrid').addEventListener('click',e=>{const b=e.target.closest('[data-open-post]');if(b){const p=posts.find(x=>String(x.id)===b.dataset.openPost);if(p)showPost(p)}})}
+function initEvents(){$$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.go)));$('#mobileToggle').onclick=()=>$('#mobileMenu').classList.toggle('open');$('#adminAccess').onclick=()=>isAdmin?openAdmin():openLogin();$('#searchFocus').onclick=()=>{setView('posts');$('#postSearch').focus()};$$('[data-close]').forEach(b=>b.onclick=()=>{const el=$('#'+b.dataset.close);el.classList.remove('show');el.setAttribute('aria-hidden','true')});$('#backToWebsite').onclick=closeLoginPage;$('#loginBrand').onclick=closeLoginPage;$('#loginForm').addEventListener('submit',signIn);$('#toggleOwnerPassword').onclick=()=>{const input=$('#loginPassword'),show=input.type==='password';input.type=show?'text':'password';$('#toggleOwnerPassword').innerHTML=`<i data-lucide="${show?'eye-off':'eye'}"></i>`;$('#toggleOwnerPassword').setAttribute('aria-label',show?'Hide password':'Show password');refreshIcons($('#toggleOwnerPassword'))};$('#closeAdmin').onclick=()=>closeAdmin();$('#adminLogout').onclick=async()=>{if(db)await db.auth.signOut();session=null;isAdmin=false;updateOwnerButton();closeAdmin();toast('You have been signed out.')};$$('[data-admin-view]').forEach(b=>b.onclick=()=>showAdminView(b.dataset.adminView));$('#adminPanel').addEventListener('click',e=>{const g=e.target.closest('[data-admin-go]');if(g)showAdminView(g.dataset.adminGo);const del=e.target.closest('[data-delete]');if(del)deleteItem(del.dataset.delete,del.dataset.id);const pub=e.target.closest('[data-toggle-publish]');if(pub)togglePublished(pub.dataset.togglePublish,pub.dataset.id,pub.dataset.published);const edit=e.target.closest('[data-edit]');if(edit)editItem(edit.dataset.edit,edit.dataset.id);const sd=e.target.closest('[data-delete-social]');if(sd)deleteSocial(sd.dataset.deleteSocial)});$('#postSearch').oninput=renderPosts;$('#postSort').onchange=renderPosts;$('#fileSearch').oninput=renderFiles;$('#fileSort').onchange=renderFiles;$('#fileType').onchange=renderFiles;$('#appSearch').oninput=renderApps;$('#appPlatform').onchange=renderApps;$('#appSort').onchange=renderApps;$('#appsGrid').addEventListener('click',async e=>{const b=e.target.closest('[data-copy-command]');if(!b)return;const command=b.dataset.copyCommand;try{await navigator.clipboard.writeText(command);toast('WinGet download command copied. Paste it into Windows Terminal or PowerShell.','success')}catch{const t=document.createElement('textarea');t.value=command;document.body.append(t);t.select();document.execCommand('copy');t.remove();toast('Download command copied.','success')}});$('#themeGrid').onclick=e=>{const b=e.target.closest('[data-theme]');if(b){const t=themes.find(t=>t.name===b.dataset.theme);if(t){applyTheme(t);toast(`${t.name} theme applied.`)}}};$('#adminContent').addEventListener('submit',e=>{if(e.target.id==='createPostForm')submitPost(e);if(e.target.id==='uploadFileForm')submitFile(e);if(e.target.id==='createAppForm')submitApp(e);if(e.target.id==='socialForm')submitSocial(e)});$('#postsGrid').addEventListener('click',e=>{const b=e.target.closest('[data-open-post]');if(b){const p=posts.find(x=>String(x.id)===b.dataset.openPost);if(p)showPost(p)}})}
 function showPost(post){const overlay=document.createElement('div');overlay.className='modal-backdrop show';overlay.innerHTML=`<div class="modal" style="width:min(720px,100%)"><div class="modal-head"><div><div class="section-kicker">${esc(post.category||'POST')}</div><h2>${esc(post.title)}</h2></div><button class="close-btn" aria-label="Close"><i data-lucide="x"></i></button></div>${post.cover_url?`<img src="${esc(post.cover_url)}" alt="" style="width:100%;max-height:260px;object-fit:cover;border-radius:15px;margin-bottom:14px">`:''}<p style="color:var(--muted);font-size:12px;line-height:1.7">${esc(post.description||'')}</p><div style="white-space:pre-wrap;line-height:1.85;font-size:14px">${esc(post.content||'')}</div><p class="field-hint">${prettyDate(post.created_at)}</p></div>`;overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.closest('.close-btn'))overlay.remove()});document.body.append(overlay);refreshIcons(overlay)}
 async function start(){
-  initEvents();renderThemes();refreshIcons();$('#year').textContent=new Date().getFullYear();
+  initEvents();renderThemes();refreshIcons();$('#year').textContent=new Date().getFullYear();$('#ownerLoginYear').textContent=new Date().getFullYear();
   const requestedAdmin=location.hash.toLowerCase()==='#admin';
   setView(requestedAdmin?'home':(location.hash.replace('#','')||'home'));
   if(initDb()){
