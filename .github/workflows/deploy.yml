@@ -18,18 +18,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Build static website and configure Supabase
+      - name: Build site and configure Supabase
         shell: bash
         env:
           SUPABASE_URL: ${{ vars.SUPABASE_URL }}
@@ -38,16 +34,14 @@ jobs:
           set -euo pipefail
 
           if [[ -z "${SUPABASE_URL}" ]]; then
-            echo "Missing GitHub Actions variable: SUPABASE_URL"
+            echo "::error::Missing repository variable SUPABASE_URL. Add it under Settings > Secrets and variables > Actions > Variables."
             exit 1
           fi
 
           if [[ -z "${SUPABASE_PUBLISHABLE_KEY}" ]]; then
-            echo "Missing GitHub Actions variable: SUPABASE_PUBLISHABLE_KEY"
+            echo "::error::Missing repository variable SUPABASE_PUBLISHABLE_KEY. Add it under Settings > Secrets and variables > Actions > Variables."
             exit 1
           fi
-
-          mkdir -p _site
 
           python3 - <<'PY'
           import json
@@ -56,45 +50,45 @@ jobs:
 
           source = Path("index.html")
           if not source.is_file():
-              raise SystemExit("index.html was not found in the repository root.")
+              raise SystemExit("::error::index.html was not found in the repository root.")
 
           html = source.read_text(encoding="utf-8")
           supabase_url = os.environ["SUPABASE_URL"].strip()
           publishable_key = os.environ["SUPABASE_PUBLISHABLE_KEY"].strip()
 
-          if not supabase_url.startswith("https://"):
-              raise SystemExit("SUPABASE_URL must be your HTTPS Supabase project URL.")
-
+          if not supabase_url.startswith("https://") or ".supabase.co" not in supabase_url:
+              raise SystemExit("::error::SUPABASE_URL does not look like an HTTPS Supabase project URL.")
+          if len(publishable_key) < 20:
+              raise SystemExit("::error::SUPABASE_PUBLISHABLE_KEY looks empty or incomplete.")
           if "YOUR_SUPABASE_URL" not in html:
-              raise SystemExit("The YOUR_SUPABASE_URL placeholder was not found in index.html.")
+              raise SystemExit("::error::The YOUR_SUPABASE_URL placeholder was not found in index.html.")
           if "YOUR_SUPABASE_PUBLISHABLE_KEY" not in html:
-              raise SystemExit("The YOUR_SUPABASE_PUBLISHABLE_KEY placeholder was not found in index.html.")
+              raise SystemExit("::error::The YOUR_SUPABASE_PUBLISHABLE_KEY placeholder was not found in index.html.")
 
           html = html.replace("'YOUR_SUPABASE_URL'", json.dumps(supabase_url), 1)
           html = html.replace("'YOUR_SUPABASE_PUBLISHABLE_KEY'", json.dumps(publishable_key), 1)
 
           if "YOUR_SUPABASE_URL" in html or "YOUR_SUPABASE_PUBLISHABLE_KEY" in html:
-              raise SystemExit("A Supabase placeholder is still present. Check index.html.")
+              raise SystemExit("::error::A Supabase placeholder is still present after configuration.")
 
-          Path("_site/index.html").write_text(html, encoding="utf-8")
-          print("Built _site/index.html with the Supabase project URL and publishable key.")
+          output = Path("_site")
+          output.mkdir(exist_ok=True)
+          (output / "index.html").write_text(html, encoding="utf-8")
+          (output / ".nojekyll").touch()
+          print("Built _site/index.html successfully.")
           PY
 
-          # GitHub Pages should not process the published folder with Jekyll.
-          touch _site/.nojekyll
-
-      - name: Upload GitHub Pages artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
   deploy:
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
