@@ -46,36 +46,53 @@ jobs:
           python3 - <<'PY'
           import json
           import os
+          import re
           from pathlib import Path
 
           source = Path("index.html")
           if not source.is_file():
-              raise SystemExit("::error::index.html was not found in the repository root.")
+              raise SystemExit("::error::index.html was not found in the repository root. Upload it beside the .github folder.")
 
           html = source.read_text(encoding="utf-8")
           supabase_url = os.environ["SUPABASE_URL"].strip()
           publishable_key = os.environ["SUPABASE_PUBLISHABLE_KEY"].strip()
 
           if not supabase_url.startswith("https://") or ".supabase.co" not in supabase_url:
-              raise SystemExit("::error::SUPABASE_URL does not look like an HTTPS Supabase project URL.")
+              raise SystemExit("::error::SUPABASE_URL must be your HTTPS Supabase project URL.")
           if len(publishable_key) < 20:
               raise SystemExit("::error::SUPABASE_PUBLISHABLE_KEY looks empty or incomplete.")
-          if "YOUR_SUPABASE_URL" not in html:
-              raise SystemExit("::error::The YOUR_SUPABASE_URL placeholder was not found in index.html.")
-          if "YOUR_SUPABASE_PUBLISHABLE_KEY" not in html:
-              raise SystemExit("::error::The YOUR_SUPABASE_PUBLISHABLE_KEY placeholder was not found in index.html.")
 
-          html = html.replace("'YOUR_SUPABASE_URL'", json.dumps(supabase_url), 1)
-          html = html.replace("'YOUR_SUPABASE_PUBLISHABLE_KEY'", json.dumps(publishable_key), 1)
+          # Replace the value assigned to each JS constant. This works whether
+          # index.html still has the YOUR_* placeholder or already has an older value.
+          replacements = {
+              "SUPABASE_URL": supabase_url,
+              "SUPABASE_PUBLISHABLE_KEY": publishable_key,
+          }
 
-          if "YOUR_SUPABASE_URL" in html or "YOUR_SUPABASE_PUBLISHABLE_KEY" in html:
-              raise SystemExit("::error::A Supabase placeholder is still present after configuration.")
+          for variable, value in replacements.items():
+              pattern = re.compile(
+                  rf"(const\s+{re.escape(variable)}\s*=\s*)(['\"]).*?\2(\s*;)",
+                  re.DOTALL,
+              )
+              html, count = pattern.subn(
+                  lambda match, value=value: match.group(1) + json.dumps(value) + match.group(3),
+                  html,
+                  count=1,
+              )
+              if count != 1:
+                  raise SystemExit(
+                      f"::error::Could not find exactly one JavaScript declaration for {variable} in index.html. "
+                      "Make sure the original AK3OR index.html is in the repository root."
+                  )
 
           output = Path("_site")
-          output.mkdir(exist_ok=True)
+          if output.exists():
+              import shutil
+              shutil.rmtree(output)
+          output.mkdir(parents=True)
           (output / "index.html").write_text(html, encoding="utf-8")
           (output / ".nojekyll").touch()
-          print("Built _site/index.html successfully.")
+          print("Built _site/index.html and configured Supabase successfully.")
           PY
 
       - name: Upload Pages artifact
